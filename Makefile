@@ -1,4 +1,4 @@
-.PHONY: help up down logs ps shell-php shell-db test
+.PHONY: help up down logs ps shell-php shell-db test test-unit
 
 help: ## Affiche cette aide
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | \
@@ -34,3 +34,7 @@ test: ## Lance les tests curl de l'API (nécessite que la stack soit up)
 		-H "Content-Type: application/json" \
 		-d '{"title":"Test ticket","description":"Créé via make test","priority":"low"}' \
 		| python3 -m json.tool || true
+
+test-unit: ## Lance les tests unitaires PHPUnit (SQLite en mémoire, sans toucher à MySQL)
+	@test -f .phpunit.cache/phpunit.phar || { mkdir -p .phpunit.cache && curl -sSL -o .phpunit.cache/phpunit.phar https://phar.phpunit.de/phpunit-11.phar; }
+	php .phpunit.cache/phpunit.phar
