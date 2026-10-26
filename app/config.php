@@ -11,7 +11,7 @@ define('DB_HOST', getenv('DB_HOST') ?: 'db');
 define('DB_NAME', getenv('DB_NAME') ?: 'minidesk');
 define('DB_USER', getenv('DB_USER') ?: 'minidesk_user');
 
-define('DB_PASS', 'sup3r_s3cr3t_passw0rd');
+define('DB_PASS', getenv('DB_PASS') ?: '');
 
 define('APP_ENV', getenv('APP_ENV') ?: 'production');
 

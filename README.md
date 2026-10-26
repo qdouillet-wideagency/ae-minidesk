@@ -144,8 +144,8 @@ Non obligatoire. Choisis **ce qui te parle le plus** — ne te force pas à tout
 | # | Fichier | Ce qui était cassé | Pourquoi c'est un problème | Correction apportée |
 |---|---------|--------------------|-----------------------------|----------------------|
 | 1 | `nginx/default.conf` | Ecoute sur le port 80 au lieu de 8080 déclaré dans `docker-compose.yml` | L'application n'est pas accessible | Remplacer `listen 80;` par `listen 8080;` dans `nginx/default.conf` |
-| 2 | `Dockerfile` | FPM n'était pas présent dans le conteneur, que NGINX s'attendait à pouvoir contacter sur le port 9000 du service `php` | L'application est en erreur (affiche `502 Bad Bateway`) | Utilisation d'une image PHP `8.2-fpm` au lieu de `8.2-alpine` |
-| 3 | | | | |
+| 2 | `Dockerfile` | FPM n'était pas présent dans le conteneur, que NGINX s'attendait à pouvoir contacter sur le port 9000 du service `php` | L'application est en erreur (affiche `502 Bad Bateway`), car le serveur Web n'a pas accès à FPM pour interpréter les fichiers PHP | Utilisation d'une image PHP `8.2-fpm` au lieu de `8.2-alpine` |
+| 3 | `app/config.php` | Le mot de passe de la base de donnés qui était écrit en dur dans ce fichier n'était pas le même que celui définit dans le `.env`, qui avait été utilisé pour créer la base de données avec un mot de passe différent | Il ne faut jamais laisser des identifiants dans le code source, ils pourraient fuiter et compromettre la sécurité de l'application et de ses données ; L'application est en erreur (`Access denied for user 'minidesk_user'`) car PHP n'a pas les bons identifiants pour accéder à la base de données | Utiliser `getenv('DB_PASS')` à la place du mot de passe en dur, pour récupérer la valeur du mot de passe depuis le fichier `.env` (fichier qui n'est pas suivi dans Git) |
 | 4 | | | | |
 | 5 | | | | |
 
