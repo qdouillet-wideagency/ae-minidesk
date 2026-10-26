@@ -1,0 +1,25 @@
+{
+  "name": "MiniDesk",
+  "dockerComposeFile": "../docker-compose.yml",
+  "service": "php",
+  "runServices": [
+    "php",
+    "nginx",
+    "db"
+  ],
+  "workspaceFolder": "/workspaces/ae-minidesk",
+  "mounts": [
+    "source=${localWorkspaceFolder},target=/workspaces/ae-minidesk,type=bind,consistency=cached"
+  ],
+  "forwardPorts": [
+    8080
+  ],
+  "shutdownAction": "stopCompose",
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "bmewburn.vscode-intelephense-client"
+      ]
+    }
+  }
+}

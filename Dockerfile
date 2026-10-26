@@ -2,6 +2,10 @@
 #             PHP-FPM sur le port 9000. Remplacez par l'image php:8.2-fpm.
 FROM php:8.2-fpm
 
+RUN apt update && \
+    apt install -y git && \
+    apt clean
+
 RUN docker-php-ext-install pdo pdo_mysql
 
 WORKDIR /var/www/html

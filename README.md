@@ -172,6 +172,10 @@ make test
 # ou : curl http://localhost:8080/
 ```
 
+### Développement avec VS Code
+
+Après avoir copié `.env.example` en `.env`, ouvrir le dépôt dans VS Code et choisir **Réouvrir dans un conteneur**. Le devcontainer démarre les services PHP, Nginx et MySQL ; l'API est accessible sur le port `8080`.
+
 > **URL publique** : *(à renseigner)*
 
 ---
