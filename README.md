@@ -143,8 +143,8 @@ Non obligatoire. Choisis **ce qui te parle le plus** — ne te force pas à tout
 
 | # | Fichier | Ce qui était cassé | Pourquoi c'est un problème | Correction apportée |
 |---|---------|--------------------|-----------------------------|----------------------|
-| 1 | | | | |
-| 2 | | | | |
+| 1 | `nginx/default.conf` | Ecoute sur le port 80 au lieu de 8080 déclaré dans `docker-compose.yml` | L'application n'est pas accessible | Remplacer `listen 80;` par `listen 8080;` dans `nginx/default.conf` |
+| 2 | `Dockerfile` | FPM n'était pas présent dans le conteneur, que NGINX s'attendait à pouvoir contacter sur le port 9000 du service `php` | L'application est en erreur (affiche `502 Bad Bateway`) | Utilisation d'une image PHP `8.2-fpm` au lieu de `8.2-alpine` |
 | 3 | | | | |
 | 4 | | | | |
 | 5 | | | | |
