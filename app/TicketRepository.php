@@ -38,7 +38,9 @@ class TicketRepository
      */
     public function findById(int $id): ?array
     {
-        $stmt = $this->db->query("SELECT * FROM tickets WHERE id = $id");
+        $stmt = $this->db->prepare("SELECT * FROM tickets WHERE id = :id");
+        $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+        $stmt->execute();
         $row  = $stmt->fetch();
         return $row ?: null;
     }
