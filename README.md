@@ -172,6 +172,18 @@ make test
 # ou : curl http://localhost:8080/
 ```
 
+### Exécuter les tests unitaires
+
+Depuis la racine du projet, lancer :
+
+```bash
+make test-unit
+```
+
+Cette commande exécute les tests PHPUnit avec SQLite en mémoire ; il n'est donc pas nécessaire de démarrer la stack Docker ni de se connecter à MySQL. PHPUnit est téléchargé automatiquement lors de sa première exécution puis conservé dans `.phpunit.cache/`.
+
+À ne pas confondre avec `make test`, qui effectue des appels HTTP à l'API et nécessite que la stack soit démarrée.
+
 ### Développement avec VS Code
 
 Après avoir copié `.env.example` en `.env`, ouvrir le dépôt dans VS Code et choisir **Réouvrir dans un conteneur**. Le devcontainer démarre les services PHP, Nginx et MySQL ; l'API est accessible sur le port `8080`.
