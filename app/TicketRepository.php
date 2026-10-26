@@ -81,7 +81,17 @@ class TicketRepository
      */
     public function updateStatus(int $id, string $status): bool
     {
-        // TODO : à implémenter
-        throw new \RuntimeException('updateStatus() n\'est pas encore implémentée.');
+        $allowedStatuses = ['open', 'in_progress', 'closed'];
+        if (!in_array($status, $allowedStatuses, true)) {
+            return false;
+        }
+
+        $stmt = $this->db->prepare(
+            'UPDATE tickets SET status = :status WHERE id = :id'
+        );
+        $stmt->bindParam(':status', $status, PDO::PARAM_STR);
+        $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+        $stmt->execute();
+        return $stmt->rowCount() > 0;
     }
 }
