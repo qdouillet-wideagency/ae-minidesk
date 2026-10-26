@@ -1,6 +1,8 @@
 -- MiniDesk - Schéma de base de données
 -- Ne pas modifier ce fichier (il est initialisé automatiquement par Docker)
 
+SET NAMES utf8mb4;
+
 CREATE DATABASE IF NOT EXISTS minidesk CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 USE minidesk;
